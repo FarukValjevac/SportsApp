@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Booking } from './bookings.entity';
@@ -12,7 +12,39 @@ export class BookingsService {
   ) {}
 
   async create(createBookingDto: CreateBookingDto): Promise<Booking> {
-    const booking = this.bookingRepository.create(createBookingDto);
+    const bookingDate = new Date(createBookingDto.date);
+    const year = bookingDate.getFullYear();
+    const month = bookingDate.getMonth();
+    const day = bookingDate.getDate();
+    const dateOnly = new Date(year, month, day);
+
+    const existingBooking = await this.bookingRepository.findOne({
+      where: {
+        sport: createBookingDto.sport,
+        date: dateOnly, // Compare only the date part
+        time: createBookingDto.time,
+      },
+    });
+
+    if (existingBooking) {
+      throw new HttpException(
+        'This slot is already booked.',
+        HttpStatus.CONFLICT,
+      );
+    }
+
+    const booking = this.bookingRepository.create({
+      ...createBookingDto,
+      date: dateOnly, // Store only the date part
+    });
     return this.bookingRepository.save(booking);
+  }
+
+  async findAll(): Promise<Booking[]> {
+    return this.bookingRepository.find();
+  }
+
+  async remove(id: number): Promise<void> {
+    await this.bookingRepository.delete(id);
   }
 }
