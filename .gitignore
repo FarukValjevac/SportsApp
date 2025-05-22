@@ -79,6 +79,9 @@ frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
 
+# env 
+frontend/.env
+
 # --- Root level exclusions ---
 .DS_Store
 Thumbs.db
