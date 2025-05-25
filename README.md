@@ -1,6 +1,6 @@
 # Aim
 
-This project, while not aiming for state-of-the-art complexity, serves as a practical demonstration of what I consider to be software development best practices. It emphasizes well-documented code for clarity and maintainability, unit tests for both the backend and frontend to ensure reliability, and a streamlined development workflow through GitHub CICD pipelines, automatically triggered on each push to individual development branches.
+This project, while not aiming for state-of-the-art complexity, serves as a practical demonstration of what I consider to be software development best practices. It emphasizes well-documented code for clarity and maintainability, unit tests for both the backend and frontend to ensure reliability both locally and via CICD, and a streamlined development workflow through GitHub CICD pipelines, automatically triggered on each push to individual development branches as well as desployment to AWS when pushed to prod.
 
 # Sports Booking App "Features"
 
