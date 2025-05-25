@@ -33,7 +33,7 @@ This is a web application enabling users to search for sports, view event detail
 
     ```bash
     git clone https://github.com/FarukValjevac/SportsApp
-    cd sports
+    cd SportsApp
     ```
 
 2.  **Navigate to the backend and install dependencies:**
@@ -55,6 +55,16 @@ This is a web application enabling users to search for sports, view event detail
     npm run build
     ```
 
+#### Before starting ensure to create your own .env file in the backend directory
+
+    ```bash
+    # Obviously this data should not be shared, but because this is a demo I will provide what I have used. Feel free to use any values that suits you.
+    DB_PORT=3306
+    DB_USER=root
+    DB_NAME=sportsapp
+    B_PASSWORD=
+    ```
+
 5.  **Start the backend development server:**
 
     ```bash
@@ -67,6 +77,10 @@ This is a web application enabling users to search for sports, view event detail
     cd ../frontend
     npm install
     ```
+
+#### Before starting ensure to create your own .env file in the frontend directory
+
+    PORT = 3001
 
 7.  **Start the frontend development server:**
     ```bash

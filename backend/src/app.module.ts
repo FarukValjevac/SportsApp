@@ -30,7 +30,7 @@ import config from './config';
         host: 'localhost',
         port: configService.getOrThrow('DB.port'),
         username: configService.getOrThrow('DB.user'),
-        password: '',
+        password: configService.getOrThrow('DB.password'),
         database: configService.getOrThrow('DB.name'),
         entities: [Booking],
         synchronize: true,
