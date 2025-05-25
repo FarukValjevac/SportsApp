@@ -1,0 +1,52 @@
+# Because AWS is costly this is just a pseudo deployment part of the CIDI pipeline to demontrate how it would be implemented.
+
+name: Deploy to AWS
+
+on:
+  push:
+    branches: [prod]
+
+jobs:
+  deploy:
+    name: Deploy Backend and Frontend to AWS
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      - name: Install backend dependencies
+        run: npm install
+
+      - name: Build backend for production
+        run: npm run build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Deploy backend to AWS Elastic Beanstalk
+        run: |
+          echo "Deploying backend to AWS Elastic Beanstalk..."
+
+      - name: Build frontend for production
+        working-directory: ../frontend
+        run: npm install
+
+      - name: Build frontend for production
+        run: npm run build
+
+      - name: Deploy frontend to AWS S3 and CloudFront
+        run: |
+          echo "Deploying frontend to AWS S3 and CloudFront..."
