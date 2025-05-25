@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  backend:
+  backend-tests:
     name: Backend Tests
     runs-on: ubuntu-latest
     defaults:
@@ -18,16 +18,34 @@ jobs:
         with:
           node-version: "lts/*"
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: npm install
 
       - name: Run backend tests
         run: npm test
 
-      - name: Backend Linting
-        run: npm run Lint
+  backend-lint:
+    name: Backend Linting
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  frontend:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      - name: Install backend dependencies
+        run: npm install
+
+      - name: Run backend linting
+        run: npm run lint
+
+  frontend-tests:
     name: Frontend Tests
     runs-on: ubuntu-latest
     defaults:
@@ -42,11 +60,29 @@ jobs:
         with:
           node-version: "lts/*"
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm install
 
       - name: Run frontend tests
         run: npm test
 
-      - name: Fronten Linting and formatting
+  frontend-lint-format:
+    name: Frontend Linting and Formatting
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      - name: Install frontend dependencies
+        run: npm install
+
+      - name: Run frontend linting and formatting checks
         run: npm run lint && npm run format:check
