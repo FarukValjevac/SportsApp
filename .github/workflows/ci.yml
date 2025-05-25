@@ -64,9 +64,7 @@ jobs:
         run: npm install
 
       - name: Run database migrations
-        run: |
-          npm install mysql
-          npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/data.source.ts
+        run: npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/data.source.ts
 
   frontend-tests:
     name: Frontend Tests
