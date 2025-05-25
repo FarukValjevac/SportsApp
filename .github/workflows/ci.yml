@@ -72,8 +72,11 @@ jobs:
       - name: Install backend dependencies
         run: npm install
 
+      - name: Istall mysql (locally it is over homebrew)
+        run: npm install mysql
+
       - name: Wait for MySQL to be ready
-        run: sleep 15s # Adjust as needed
+        run: sleep 15s
 
       - name: Run database migrations
         run: npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/data-source.ts
