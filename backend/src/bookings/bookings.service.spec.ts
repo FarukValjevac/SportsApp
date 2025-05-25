@@ -100,6 +100,7 @@ describe('BookingsService', () => {
         date: new Date('2025-05-28T10:00:00.000Z'),
         time: '11:00',
       };
+
       const savedBooking = { id: 1, ...createBookingDto };
 
       bookingRepository.findOne!.mockResolvedValue(undefined);
