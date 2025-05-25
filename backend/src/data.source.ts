@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
-import { Booking } from './bookings/bookings.entity'; // Import your entities
+import { Booking } from './bookings/bookings.entity';
 
+// Defines the TypeORM DataSource for database connection and migrations
 export const AppDataSource = new DataSource({
   type: 'mysql',
   host: 'localhost',

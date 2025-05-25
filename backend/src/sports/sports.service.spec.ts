@@ -2,9 +2,16 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SportsService } from './sports.service';
 import { Event } from './event.interface';
 
+/**
+ * Test suite for the SportsService.
+ */
 describe('SportsService', () => {
   let service: SportsService;
 
+  /**
+   * Setup function that runs before each test.
+   * Creates a testing module and obtains an instance of the SportsService.
+   */
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [SportsService],
@@ -13,17 +20,29 @@ describe('SportsService', () => {
     service = module.get<SportsService>(SportsService);
   });
 
+  /**
+   * Test to ensure that the SportsService is successfully defined and injected.
+   */
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
+  /**
+   * Test suite for the getEvents method.
+   */
   describe('getEvents', () => {
+    /**
+     * Test to ensure that getEvents returns an array.
+     */
     it('should return an array of events', () => {
       const events = service.getEvents();
       expect(Array.isArray(events)).toBe(true);
       expect(events.length).toBeGreaterThan(0);
     });
 
+    /**
+     * Test to ensure that getEvents returns the expected list of event objects.
+     */
     it('should return the expected list of events', () => {
       const expectedEvents: Event[] = [
         {

@@ -1,4 +1,4 @@
-# Because AWS is costly this is just a pseudo deployment part of the CIDI pipeline to demontrate how it would be implemented.
+# Because AWS is costly this is just a pseudo deployment part of the CIDI pipeline to demonstrate how it would be implemented.
 
 name: Deploy to AWS
 

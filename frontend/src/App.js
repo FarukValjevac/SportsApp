@@ -3,16 +3,28 @@ import EventSearch from './EventSearch';
 import BookedSlots from './BookedSlots';
 import './App.css';
 
+
+// Manages the display of the search functionality and the booked slots sidebar.
 function App() {
+  // State to control the visibility of the booked slots sidebar.
   const [showBookedSlots, setShowBookedSlots] = useState(false);
+  // State to store the list of booked slots fetched from the backend.
   const [bookedSlots, setBookedSlots] = useState([]);
+  // State to track the loading status of fetching booked slots.
   const [loadingBookedSlots, setLoadingBookedSlots] = useState(true);
+  // State to store any errors encountered while fetching booked slots.
   const [errorBookedSlots, setErrorBookedSlots] = useState('');
 
+  /**
+   * Toggles the visibility of the booked slots sidebar.
+   */
   const toggleBookedSlots = () => {
     setShowBookedSlots(!showBookedSlots);
   };
 
+  /**
+   * Fetches the list of all booked slots from the backend.
+   */
   const fetchBookedSlots = async () => {
     setLoadingBookedSlots(true);
     setErrorBookedSlots('');
@@ -31,6 +43,10 @@ function App() {
     }
   };
 
+  /**
+   * useEffect hook to fetch booked slots when the `showBookedSlots` state becomes true.
+   * The dependency array ensures this effect runs only when `showBookedSlots` changes.
+   */
   useEffect(() => {
     if (showBookedSlots) {
       fetchBookedSlots();

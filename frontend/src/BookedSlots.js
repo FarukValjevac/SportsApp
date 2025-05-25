@@ -1,6 +1,15 @@
 import React from 'react';
 
+/**
+ * Component to display a list of booked sports activities.
+ * Receives the list of booked slots, loading and error states, and a function to handle removal.
+ */
 function BookedSlots({ bookedSlots, loading, error, onRemove }) {
+  /**
+   * Handles the removal of a booking by its ID.
+   * Calls the `onRemove` prop function to trigger a data refresh in the parent component.
+   * @param id The unique identifier of the booking to remove.
+   */
   const handleRemove = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/bookings/${id}`, {
@@ -11,21 +20,29 @@ function BookedSlots({ bookedSlots, loading, error, onRemove }) {
       }
       const responseData = await response.json();
       console.log(responseData.message);
-      onRemove(); // Call the prop to refresh booked slots
+      onRemove(); 
     } catch (error) {
       console.error('Failed to remove booking:', error);
-      // setError('Failed to remove booking.'); // Removed local error state
     }
   };
 
+  /**
+   * Renders a loading message while data is being fetched.
+   */
   if (loading) {
     return <p style={{ color: '#666' }}>Loading your bookings...</p>;
   }
 
+  /**
+   * Renders an error message if there was an issue fetching data.
+   */
   if (error) {
     return <p style={{ color: 'red' }}>Error loading bookings.</p>;
   }
 
+  /**
+   * Renders the list of booked activities or a message if no bookings exist.
+   */
   return (
     <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', width: '100%', maxWidth: '600px', marginTop: '20px' }}>
       <h2 style={{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '15px', color: '#333', textAlign: 'center' }}>Your Booked Activities</h2>

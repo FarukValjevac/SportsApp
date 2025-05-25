@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 
+/**
+ * Component for searching sports events and displaying the results.
+ * Allows users to input a sport and view available activities for the coming week.
+ */
 function EventSearch(props) {
+  // State to store the user's search term.
   const [searchTerm, setSearchTerm] = useState('');
+  // State to store the array of search results (events).
   const [searchResults, setSearchResults] = useState([]);
+  // State to display a success message after booking.
   const [bookingSuccessMessage, setBookingSuccessMessage] = useState('');
+  // State to display an error message if booking fails.
   const [bookingErrorMessage, setBookingErrorMessage] = useState('');
-  const [hasSearched, setHasSearched] = useState(false); // New state to track if a search has been made
+  // State to track if a search has been performed to conditionally render the "not available" message.
+  const [hasSearched, setHasSearched] = useState(false);
 
+  /**
+   * Handles the search functionality.
+   * Calls the backend API to fetch events based on the search term.
+   */
   const handleSearch = async () => {
     setBookingSuccessMessage('');
     setBookingErrorMessage('');
-    setHasSearched(true); // Set hasSearched to true when a search is performed
+    setHasSearched(true); // Set to true when a search is initiated.
     try {
       const response = await fetch(`http://localhost:3000/sports/events?sport=${searchTerm}`);
       if (!response.ok) {
@@ -25,6 +38,11 @@ function EventSearch(props) {
     }
   };
 
+  /**
+   * Handles the booking of a specific event.
+   * Sends a POST request to the backend to create a new booking.
+   * @param event The event object to be booked.
+   */
   const handleBook = async (event) => {
     setBookingSuccessMessage('');
     setBookingErrorMessage('');
@@ -38,7 +56,7 @@ function EventSearch(props) {
           sport: event.sport,
           date: event.date,
           time: event.time,
-          userId: null,
+          userId: null, // Temporarily set userId to null
         }),
       });
 
@@ -54,7 +72,7 @@ function EventSearch(props) {
       const result = await response.json();
       console.log('Booking response:', result);
       setBookingSuccessMessage(`Successfully booked ${event.sport} on ${new Date(event.date).toLocaleDateString()} at ${event.time}`);
-      props.onBookingSuccess(); // Call the prop to refresh booked slots
+      props.onBookingSuccess(); // Call the prop to refresh booked slots in the parent component.
     } catch (error) {
       console.error('Failed to book event:', error);
       let displayMessage = 'Failed to book event.';
