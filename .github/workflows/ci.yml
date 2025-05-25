@@ -3,7 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  backend-tests:
+  backend:
     name: Backend Tests
     runs-on: ubuntu-latest
     defaults:
@@ -24,7 +24,10 @@ jobs:
       - name: Run backend tests
         run: npm test
 
-  frontend-tests:
+      - name: Backend Linting
+        run: npm run Lint
+
+  frontend:
     name: Frontend Tests
     runs-on: ubuntu-latest
     defaults:
@@ -44,3 +47,6 @@ jobs:
 
       - name: Run frontend tests
         run: npm test
+
+      - name: Fronten Linting and formatting
+        run: npm run lint && npm run format:check
