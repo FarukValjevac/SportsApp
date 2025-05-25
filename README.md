@@ -4,7 +4,7 @@ This project, while not aiming for state-of-the-art complexity, serves as a prac
 
 # Sports Booking App "Features"
 
-Prep App for 28.5.2025.
+Prep App for 28.5.2025. Will be removed after the whole process is over.
 
 This is a web application enabling users to search for sports, view event details, book available slots, and manage their bookings by removing them. The application ensures a smooth user experience with features like duplicate booking prevention and clear feedback on booking status.
 
