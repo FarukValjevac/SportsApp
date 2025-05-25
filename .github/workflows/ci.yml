@@ -45,6 +45,16 @@ jobs:
       - name: Run backend linting
         run: npm run lint
 
+  backend-database-migration:
+    name: Run database migrations
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: test
+        run: npm run typeorm migration:run
+
   frontend-tests:
     name: Frontend Tests
     runs-on: ubuntu-latest
