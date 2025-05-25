@@ -55,7 +55,7 @@ This is a web application enabling users to search for sports, view event detail
     npm run build
     ```
 
-#### Before starting ensure to create your own .env file in the backend directory
+    **Before starting ensure to create your own .env file in the frontend directory**
 
     ```bash
     # Obviously this data should not be shared, but because this is a demo I will provide what I have used. Feel free to use any values that suits you.
@@ -71,20 +71,32 @@ This is a web application enabling users to search for sports, view event detail
     npm run start:dev
     ```
 
-6.  **Navigate to the frontend and install dependencies:**
+6.  **Run tests:**
+
+    ```bash
+    $ npm run test
+    ```
+
+7.  **Navigate to the frontend and install dependencies:**
 
     ```bash
     cd ../frontend
     npm install
     ```
 
-#### Before starting ensure to create your own .env file in the frontend directory
+    **Before starting ensure to create your own .env file in the frontend directory**
 
+    ```bash
     PORT = 3001
+    ```
 
-7.  **Start the frontend development server:**
+8.  **Start the frontend development server:**
     ```bash
     npm start
+    ```
+9.  **Run test:**
+    ```bash
+    npm test
     ```
 
 The frontend will run on `http://localhost:3001`, and the backend on `http://localhost:3000`.
