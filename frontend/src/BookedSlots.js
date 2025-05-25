@@ -1,30 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-function BookedSlots() {
-  const [bookedSlots, setBookedSlots] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    const fetchBookedSlots = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/bookings');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        setBookedSlots(data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Failed to fetch booked slots:', error);
-        setError('Failed to fetch booked slots.');
-        setLoading(false);
-      }
-    };
-
-    fetchBookedSlots();
-  }, []);
-
+function BookedSlots({ bookedSlots, loading, error, onRemove }) {
   const handleRemove = async (id) => {
     try {
       const response = await fetch(`http://localhost:3000/bookings/${id}`, {
@@ -33,50 +9,41 @@ function BookedSlots() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      // Refresh the list after successful deletion
       const responseData = await response.json();
       console.log(responseData.message);
-      const fetchBookedSlots = async () => {
-        try {
-          const response = await fetch('http://localhost:3000/bookings');
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const data = await response.json();
-          setBookedSlots(data);
-          setLoading(false);
-        } catch (error) {
-          console.error('Failed to fetch booked slots:', error);
-          setError('Failed to fetch booked slots.');
-          setLoading(false);
-        }
-      };
-      fetchBookedSlots();
+      onRemove(); // Call the prop to refresh booked slots
     } catch (error) {
       console.error('Failed to remove booking:', error);
-      setError('Failed to remove booking.');
+      // setError('Failed to remove booking.'); // Removed local error state
     }
   };
 
   if (loading) {
-    return <p>Loading booked slots...</p>;
+    return <p style={{ color: '#666' }}>Loading your bookings...</p>;
   }
 
   if (error) {
-    return <p style={{ color: 'red' }}>{error}</p>;
+    return <p style={{ color: 'red' }}>Error loading bookings.</p>;
   }
 
   return (
-    <div>
-      <h2>All Booked Slots</h2>
+    <div style={{ backgroundColor: 'white', padding: '20px', borderRadius: '5px', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', width: '100%', maxWidth: '600px', marginTop: '20px' }}>
+      <h2 style={{ fontSize: '1.5em', fontWeight: 'bold', marginBottom: '15px', color: '#333', textAlign: 'center' }}>Your Booked Activities</h2>
       {bookedSlots.length === 0 ? (
-        <p>No slots have been booked yet.</p>
+        <p style={{ color: '#555' }}>No slots have been booked yet.</p>
       ) : (
-        <ul>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
           {bookedSlots.map((slot, index) => (
-            <li key={index}>
-              {slot.sport} - {new Date(slot.date).toLocaleDateString()} - {slot.time}
-              <button onClick={() => handleRemove(slot.id)}>Remove</button>
+            <li key={index} style={{ backgroundColor: '#f9f9f9', border: '1px solid #eee', borderRadius: '3px', padding: '10px', marginBottom: '5px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <span style={{ color: '#555' }}>
+                <strong style={{ fontWeight: 'bold' }}>{slot.sport}</strong> - {new Date(slot.date).toLocaleDateString()} at {slot.time}
+              </span>
+              <button
+                onClick={() => handleRemove(slot.id)}
+                style={{ backgroundColor: '#dc3545', color: 'white', padding: '8px 12px', borderRadius: '3px', border: 'none', cursor: 'pointer', marginLeft: '10px' }}
+              >
+                Remove
+              </button>
             </li>
           ))}
         </ul>

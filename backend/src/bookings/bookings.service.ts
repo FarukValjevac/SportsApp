@@ -21,7 +21,7 @@ export class BookingsService {
     const existingBooking = await this.bookingRepository.findOne({
       where: {
         sport: createBookingDto.sport,
-        date: dateOnly, // Compare only the date part
+        date: dateOnly,
         time: createBookingDto.time,
       },
     });
@@ -35,7 +35,7 @@ export class BookingsService {
 
     const booking = this.bookingRepository.create({
       ...createBookingDto,
-      date: dateOnly, // Store only the date part
+      date: dateOnly,
     });
     return this.bookingRepository.save(booking);
   }
