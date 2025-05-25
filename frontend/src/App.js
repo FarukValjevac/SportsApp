@@ -3,28 +3,16 @@ import EventSearch from './EventSearch';
 import BookedSlots from './BookedSlots';
 import './App.css';
 
-
-// Manages the display of the search functionality and the booked slots sidebar.
 function App() {
-  // State to control the visibility of the booked slots sidebar.
   const [showBookedSlots, setShowBookedSlots] = useState(false);
-  // State to store the list of booked slots fetched from the backend.
   const [bookedSlots, setBookedSlots] = useState([]);
-  // State to track the loading status of fetching booked slots.
   const [loadingBookedSlots, setLoadingBookedSlots] = useState(true);
-  // State to store any errors encountered while fetching booked slots.
   const [errorBookedSlots, setErrorBookedSlots] = useState('');
 
-  /**
-   * Toggles the visibility of the booked slots sidebar.
-   */
   const toggleBookedSlots = () => {
     setShowBookedSlots(!showBookedSlots);
   };
 
-  /**
-   * Fetches the list of all booked slots from the backend.
-   */
   const fetchBookedSlots = async () => {
     setLoadingBookedSlots(true);
     setErrorBookedSlots('');
@@ -43,10 +31,6 @@ function App() {
     }
   };
 
-  /**
-   * useEffect hook to fetch booked slots when the `showBookedSlots` state becomes true.
-   * The dependency array ensures this effect runs only when `showBookedSlots` changes.
-   */
   useEffect(() => {
     if (showBookedSlots) {
       fetchBookedSlots();
@@ -57,9 +41,11 @@ function App() {
     <div className="app" style={{ fontFamily: 'sans-serif', textAlign: 'center', padding: '20px', backgroundColor: 'white', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <header className="app-header" style={{ backgroundColor: '#f8f9fa', color: 'black', padding: '20px', marginBottom: '20px', borderRadius: '5px', borderBottom: '1px solid #ddd', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', maxWidth: '600px' }}>
         <h1 style={{ fontSize: '2em', fontWeight: 'bold', marginBottom: '0' }}>Sports Booking App</h1>
-        <button onClick={toggleBookedSlots} style={{ backgroundColor: '#21A696', color: 'white', padding: '8px 12px', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>
-          {showBookedSlots ? 'Hide Bookings' : 'My Bookings'}
-        </button>
+        {!showBookedSlots && (
+          <button onClick={toggleBookedSlots} style={{ backgroundColor: '#21A696', color: 'white', padding: '8px 12px', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>
+            My Bookings
+          </button>
+        )}
       </header>
       <div style={{ width: '100%', maxWidth: '600px' }}>
         <EventSearch onBookingSuccess={fetchBookedSlots} />
