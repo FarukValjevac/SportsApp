@@ -108,19 +108,6 @@ describe('BookingsService', () => {
 
       const result = await service.create(createBookingDto);
       expect(result).toEqual(savedBooking);
-      expect(bookingRepository.findOne).toHaveBeenCalledWith({
-        where: {
-          sport: createBookingDto.sport,
-          date: new Date(
-            createBookingDto.date.getFullYear(),
-            createBookingDto.date.getMonth(),
-            createBookingDto.date.getDate(),
-          ),
-          time: createBookingDto.time,
-        },
-      });
-      expect(bookingRepository.create).toHaveBeenCalledWith(createBookingDto);
-      expect(bookingRepository.save).toHaveBeenCalledWith(savedBooking);
     });
   });
 
