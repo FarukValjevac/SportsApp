@@ -64,7 +64,7 @@ jobs:
         run: npm install
 
       - name: Run database migrations
-        run: npm run typeorm migration:run -- -d ./src/data.source.ts
+        run: npm run migration:run
 
   frontend-tests:
     name: Frontend Tests
