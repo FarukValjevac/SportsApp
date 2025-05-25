@@ -46,13 +46,24 @@ jobs:
         run: npm run lint
 
   backend-database-migration:
-    name: Run database migrations
+    name: Backend Run database migrations
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: backend
     steps:
-      - name: test
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      - name: Install backend dependencies
+        run: npm install
+
+      - name: Run database migrations
         run: npm run typeorm migration:run
 
   frontend-tests:
