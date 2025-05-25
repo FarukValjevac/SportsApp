@@ -18,11 +18,68 @@ jobs:
         with:
           node-version: "lts/*"
 
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: npm install
 
       - name: Run backend tests
         run: npm test
+
+  backend-lint:
+    name: Backend Linting
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      - name: Install backend dependencies
+        run: npm install
+
+      - name: Run backend linting
+        run: npm run lint
+
+  backend-database-migration:
+    name: Backend Run database migrations
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: sportsapp
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+
+      - name: Install backend dependencies
+        run: npm install
+
+      - name: Istall mysql (locally it is over homebrew)
+        run: npm install mysql
+
+      - name: Wait for MySQL to be ready
+        run: sleep 15s
+
+      - name: Run database migrations
+        run: npx ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/data.source.ts
 
   frontend-tests:
     name: Frontend Tests
@@ -39,7 +96,7 @@ jobs:
         with:
           node-version: "lts/*"
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         run: npm install
 
       - name: Run frontend tests
