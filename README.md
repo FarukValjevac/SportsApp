@@ -1,23 +1,31 @@
-# Sports Booking App
+# Aim
 
-Prep App 😉
+This project, while not aiming for state-of-the-art complexity, serves as a practical demonstration of what I consider to be software development best practices. It emphasizes well-documented code for clarity and maintainability, unit tests for both the backend and frontend to ensure reliability, and a streamlined development workflow through GitHub CICD pipelines, automatically triggered on each push to individual development branches.
 
-This is a web application that allows users to search for and book slots for various sports activities.
+# Sports Booking App "Features"
+
+Prep App for 28.5.2025.
+
+This is a web application enabling users to search for sports, view event details, book available slots, and manage their bookings by removing them. The application ensures a smooth user experience with features like duplicate booking prevention and clear feedback on booking status.
 
 ## Features
 
-- **Search for Sports:** Users can search for available sports using a search bar. The application displays a list of upcoming events for the searched sport within the next week.
-- **View Event Details:** Each search result shows the sport, date, and time of the event.
-- **Book a Slot:** Users can book an available time slot for a selected sport event by clicking a "Book" button.
-- **Booking Confirmation:** Upon successful booking, a confirmation message is displayed to the user. The application prevents booking the same slot multiple times.
-- **View All Booked Slots:** Users can view a list of all currently booked slots.
-- **Remove Booked Slots:** Users have the option to remove their booked slots from the list.
+- **Searching for sports**
+- **Viewing event details**
+- **Booking a slot**
+- **Preventing duplicate bookings**
+- **Viewing all booked slots in a sidebar**
+- **Removing booked slots**
+- **Providing clear user feedback (success/error messages)**
+- **Unit tests for both backend and frontend**
+- **Automated CI/CD workflow with GitHub Actions, including database migrations**
 
 ## Tech Stack
 
 - **Frontend:** React
 - **Backend:** NestJS (Node.js framework)
 - **Database:** MySQL
+- **Cloud:** AWS
 
 ## Setup (for developers)
 
@@ -69,4 +77,4 @@ The frontend will run on `http://localhost:3001`, and the backend on `http://loc
 
 ## Next Steps
 
-Future development could include user authentication, availability management, email confirmations, more advanced UI/UX improvements.
+Future development could include user authentication, availability management, email confirmations.
