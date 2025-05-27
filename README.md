@@ -46,28 +46,25 @@ This is a web application enabling users to search for sports, view event detail
 3.  **Set up the MySQL database:**
 
     - Ensure you have MySQL installed and running.
-    - Create a database named `sportsapp`:
-
-    ```bash
-    CREATE DATABASE sportapp
-    ```
-
-    - Update the database connection details in `backend/src/app.module.ts` with your MySQL username and password.
-
-4.  **Build the backend:**
-
-    ```bash
-    npm run build
-    ```
+    - Update the database connection details in `backend/src/app.module.ts` with your MySQL credientals.
 
     **Before starting ensure to create your own .env file in the frontend directory**
 
     ```bash
     # Obviously this data should not be shared, but because this is a demo I will provide what I have used. Feel free to use any values that suits you.
+
+    PORT=3000
+
     DB_PORT=3306
     DB_USER=root
     DB_NAME=sportsapp
     B_PASSWORD=
+    ```
+
+4.  **Build the backend:**
+
+    ```bash
+    npm run build
     ```
 
 5.  **Start the backend development server:**
