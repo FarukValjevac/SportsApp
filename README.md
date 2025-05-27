@@ -46,7 +46,12 @@ This is a web application enabling users to search for sports, view event detail
 3.  **Set up the MySQL database:**
 
     - Ensure you have MySQL installed and running.
-    - Create a database named `sportsapp`.
+    - Create a database named `sportsapp`:
+
+    ```bash
+    CREATE DATABASE sportapp
+    ```
+
     - Update the database connection details in `backend/src/app.module.ts` with your MySQL username and password.
 
 4.  **Build the backend:**
