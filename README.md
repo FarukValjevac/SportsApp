@@ -58,7 +58,7 @@ This is a web application enabling users to search for sports, view event detail
     DB_PORT=3306
     DB_USER=root
     DB_NAME=sportsapp
-    B_PASSWORD=
+    DB_PASSWORD=
     ```
 
 4.  **Build the backend:**
