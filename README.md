@@ -46,7 +46,7 @@ This is a web application enabling users to search for sports, view event detail
 3.  **Set up the MySQL database:**
 
     - Ensure you have MySQL installed and running.
-    - Update the database connection details in `backend/src/app.module.ts` with your MySQL credientals.
+    - Update the database connection details in `backend/src/app.module.ts` with your MySQL credentials.
 
     **Before starting ensure to create your own .env file in the frontend directory**
 
