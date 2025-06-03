@@ -72,7 +72,7 @@ jobs:
       - name: Install backend dependencies
         run: npm install
 
-      - name: Istall mysql (locally it is over homebrew)
+      - name: Istall mysql
         run: npm install mysql
 
       - name: Wait for MySQL to be ready
