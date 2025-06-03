@@ -2,6 +2,8 @@
 
 This project, while not aiming for state-of-the-art complexity, serves as a practical demonstration of what I consider to be software development best practices. It emphasizes well-documented code for clarity and maintainability, unit tests for both the backend and frontend to ensure reliability both locally and via CICD, and a streamlined development workflow through GitHub CICD pipelines, automatically triggered on each push to individual development branches as well as desployment to AWS when pushed to prod.
 
+The comments are intentionally excessive to serve as a showcase. In real life, they would be much leaner but would still include all the necessary contextual information.
+
 # Sports Booking App "Features"
 
 Prep App for 28.5.2025. Will be removed after the whole process is over.
@@ -27,7 +29,7 @@ This is a web application enabling users to search for sports, view event detail
 - **Database:** MySQL
 - **Cloud:** AWS
 
-## Setup (for developers)
+## Setup
 
 1.  **Clone the repository:**
 
@@ -45,9 +47,11 @@ This is a web application enabling users to search for sports, view event detail
 
 3.  **Set up the MySQL database:**
 
-    - Ensure you have MySQL installed and running.
-    - The database will be created automatically after running the backend if it doesn't already exist.
-    - Update the database connection details in `backend/src/app.module.ts` with your MySQL credentials.
+    - Ensure you have Docker installed and run in the root directory (Sports):
+
+    ```bash
+    docker-compose up -d
+    ```
 
     **Before starting ensure to create your own .env file in the frontend directory**
 
@@ -58,8 +62,8 @@ This is a web application enabling users to search for sports, view event detail
 
     DB_PORT=3306
     DB_USER=root
+    DB_PASSWORD=root
     DB_NAME=sportsapp
-    DB_PASSWORD=
     ```
 
 4.  **Build the backend:**
